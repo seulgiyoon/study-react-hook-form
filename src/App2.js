@@ -1,19 +1,7 @@
-import React from "react";
-import { useForm } from "react-hook-form";
+import React from 'react';
+import './App.css';
+import WritePushPage from './pages/WritePushPage';
 
 export default function App2() {
-  const { register, handleSubmit } = useForm();
-  const onSubmit = data => console.log(data);
-   
-  return (
-    <form onSubmit={handleSubmit(onSubmit)}>
-      <input name="firstName" ref={register} />
-      <select name="gender" ref={register}>
-        <option value="female">female</option>
-        <option value="male">male</option>
-        <option value="other">other</option>
-      </select>
-      <input type="submit" />
-    </form>
-  );
+  return <WritePushPage />;
 }
