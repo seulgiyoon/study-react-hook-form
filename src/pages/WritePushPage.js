@@ -2,13 +2,13 @@ import React, { useState } from 'react';
 import WritePush from '../template/WritePush';
 import { useForm } from 'react-hook-form';
 
-export default function WritePushPage() {
+export default function WritePushPage(props) {
   const { register, handleSubmit, watch, reset, errors } = useForm();
   const onSubmit = (data) => {
     setResult(JSON.stringify(data, null, 2));
-    console.log(data);
   };
   const [result, setResult] = useState('');
+  const watchInspectionDetail = watch("pet.inspection", props.set);
 
   const data = {
     title: 'PUSH 대상 설정',
@@ -107,6 +107,47 @@ export default function WritePushPage() {
                 title: '1~7세 미만',
               },
             ],
+          },
+          {
+            title: '검사횟수',
+            data: {
+              toggleFunction: watchInspectionDetail,
+              toggleStyle: 'kg',
+              toggle: [
+                {
+                  type: 'number',
+                  id: 'pet_inspection_start',
+                  name: 'pet.inspection_start',
+                  register: register,
+                  title: '',
+                },
+                {
+                  type: 'number',
+                  id: 'pet_inspection_end',
+                  name: 'pet.inspection_end',
+                  register: register,
+                  title: '',
+                },
+              ],
+              data: [
+                {
+                  type: 'radio',
+                  id: 'pet_inspection_select1',
+                  name: 'pet.inspection',
+                  value: '',
+                  register: register,
+                  title: '미설정',
+                },
+                {
+                  type: 'radio',
+                  id: 'pet_inspection_select2',
+                  name: 'pet.inspection',
+                  value: 'set',
+                  register: register,
+                  title: '설정',
+                },
+              ],
+            },
           },
         ],
       },

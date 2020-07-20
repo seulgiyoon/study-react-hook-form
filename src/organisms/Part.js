@@ -1,5 +1,5 @@
 import React from 'react';
-import Option from '../molecules/Option';
+import Option from '../molecules/SelectItem';
 
 export default function Part({ title, data }) {
   return (
