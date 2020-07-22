@@ -4,31 +4,39 @@ import { OnlyCheckbox, RadioDate } from '../organisms';
 import { useFormContext } from 'react-hook-form';
 
 export default function Category1(props) {
-  const { register, watch, reset } = useFormContext();
-
-  const ageData = [
-    {
-      id: 'member_age_select1',
-      name: 'member.age',
-      value: 'all',
-      register: register,
-      title: '전연령',
-    },
-    {
-      id: 'member_age_select2',
-      name: 'member.age',
-      value: '10',
-      register: register,
-      title: '10대',
-    },
-    {
-      id: 'member_age_select3',
-      name: 'member.age',
-      value: '20',
-      register: register,
-      title: '20대',
-    },
-  ];
+  const { getValues, register, watch, reset } = useFormContext();
+  const ageData = {
+    // isDisable: watch('member.age[0]', props.all),
+    checkboxData: [
+      {
+        id: 'member_age_select1',
+        name: 'member.age[0]',
+        value: 'all',
+        register: register,
+        title: '전연령',
+        onChange: () =>
+          watch('member.age[0]', props.all)
+            ? reset({ member: { ...getValues().member, age: ['all', false, false] } })
+            : reset({ member: { ...getValues().member, age: [false, false, false] } }),
+      },
+      {
+        id: 'member_age_select2',
+        name: 'member.age[1]',
+        value: '10',
+        register: register,
+        title: '10대',
+        isDisable: watch('member.age[0]', props.all),
+      },
+      {
+        id: 'member_age_select3',
+        name: 'member.age[2]',
+        value: '20',
+        register: register,
+        title: '20대',
+        isDisable: watch('member.age[0]', props.all),
+      },
+    ],
+  };
 
   const registerDateData = {
     isDisable: watch('member.register', props.set),
@@ -40,7 +48,11 @@ export default function Category1(props) {
         register: register,
         title: '미설정',
         defaultChecked: true,
-        onChange: () => reset({ member: { register_start: '', register_end: '' } })
+        onChange: () => {
+          reset(
+            { member: { ...getValues().member, register_start: '', register_end: '' } }
+          )
+        }
       },
       {
         id: 'member_register_select2',

@@ -3,13 +3,10 @@ import { FormProvider, useForm } from 'react-hook-form';
 import Category1 from '../template/Category1';
 
 export default function SetPush(props) {
-  const { register } = useForm();
   const onSubmit = (data) => {
     setResult(JSON.stringify(data, null, 2));
   };
   const [result, setResult] = useState('');
-  // const watchInspectionDetail = watch('pet.inspection', props.set);
-
   const methods = useForm();
 
   return (
@@ -17,7 +14,7 @@ export default function SetPush(props) {
     <FormProvider {...methods}>
       <h1>{'PUSH 설정'}</h1>
       <form onSubmit={methods.handleSubmit(onSubmit)}>
-        <Category1 register={register} />
+        <Category1 />
         <div>
           <input type="submit" />
         </div>
