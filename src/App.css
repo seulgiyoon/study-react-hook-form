@@ -10,3 +10,7 @@ input[type='button'] {
 p {
   margin: 0;
 }
+
+.MuiInput-formControl {
+  margin: 0;
+}

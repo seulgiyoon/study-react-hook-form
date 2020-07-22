@@ -66,10 +66,16 @@ export default function Category1(props) {
       {
         id: 'member_register_start',
         name: 'member.register_start',
+        register: register(
+          watch('member.register', props.set) ? { required : 'error' } : null
+        ),
       },
       {
         id: 'member_register_end',
         name: 'member.register_end',
+        register: register({
+          validate: (value) => getValues().member.register_start <= value || 'error message'  // <p>error message</p>
+        })
       },
     ],
   };

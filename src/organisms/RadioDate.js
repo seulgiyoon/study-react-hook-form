@@ -5,7 +5,7 @@ import { DateInputGroup } from '../molecules';
 export default function RadioDate({ title, groupData }) {
   const { radioData, dateData, isDisable } = groupData;
   return (
-    <div>
+    <div style={{display: 'flex'}}>
       <p>{title}</p>
       <RadioButtonGroup inputData={radioData} />
       <DateInputGroup inputData={dateData} isDisable={isDisable} />
