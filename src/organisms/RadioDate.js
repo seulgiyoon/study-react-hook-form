@@ -2,13 +2,13 @@ import React from 'react';
 import { RadioButtonGroup } from '../molecules';
 import { DateInputGroup } from '../molecules';
 
-export default function RadioDate({ control, title, groupData }) {
-  const { radioData, dateData } = groupData;
+export default function RadioDate({ title, groupData }) {
+  const { radioData, dateData, isDisable } = groupData;
   return (
     <div>
       <p>{title}</p>
       <RadioButtonGroup inputData={radioData} />
-      <DateInputGroup control={control} inputData={dateData} />
+      <DateInputGroup inputData={dateData} isDisable={isDisable} />
     </div>
   );
 }
