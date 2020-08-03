@@ -4,11 +4,11 @@ import React from 'react';
 // import { useFormContext } from 'react-hook-form';
 import { Input } from '../atoms';
 
-export default function DateInputGroup({ inputData, isDisable }) {
+export default function DateInputGroup({ inputData }) {
   return (
     <>
       {inputData.map((item, index) => (
-        <Input key={index} type={'date'} item={item} isDisable={isDisable} />
+        <Input key={index} type={'date'} item={item} />
       ))}
     </>
   );

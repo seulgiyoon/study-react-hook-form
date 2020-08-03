@@ -6,7 +6,6 @@ import { useFormContext } from 'react-hook-form';
 export default function Category1(props) {
   const { getValues, register, watch, reset } = useFormContext();
   const ageData = {
-    // isDisable: watch('member.age[0]', props.all),
     checkboxData: [
       {
         id: 'member_age_select1',
@@ -16,24 +15,45 @@ export default function Category1(props) {
         title: '전연령',
         onChange: () =>
           watch('member.age[0]', props.all)
-            ? reset({ member: { ...getValues().member, age: ['all', false, false] } })
-            : reset({ member: { ...getValues().member, age: [false, false, false] } }),
+            ? reset({
+                member: { ...getValues().member, age: ['all', false, false] },
+              })
+            : reset({
+                member: { ...getValues().member, age: [false, false, false] },
+              }),
       },
       {
         id: 'member_age_select2',
         name: 'member.age[1]',
-        value: '10',
+        value: 'ten',
         register: register,
         title: '10대',
-        isDisable: watch('member.age[0]', props.all),
+        onChange: () =>
+          watch('member.age[2]', props.twenty)
+            ? reset({
+                member: { ...getValues().member, age: ['all', false, false] },
+              })
+            : reset({
+                member: { ...getValues().member, age: [false, 'ten', false] },
+              }),
       },
       {
         id: 'member_age_select3',
         name: 'member.age[2]',
-        value: '20',
+        value: 'twenty',
         register: register,
         title: '20대',
-        isDisable: watch('member.age[0]', props.all),
+        onChange: () =>
+          watch('member.age[1]', props.ten)
+            ? reset({
+                member: { ...getValues().member, age: ['all', false, false] },
+              })
+            : reset({
+                member: {
+                  ...getValues().member,
+                  age: [false, false, 'twenty'],
+                },
+              }),
       },
     ],
   };
@@ -49,10 +69,14 @@ export default function Category1(props) {
         title: '미설정',
         defaultChecked: true,
         onChange: () => {
-          reset(
-            { member: { ...getValues().member, register_start: '', register_end: '' } }
-          )
-        }
+          reset({
+            member: {
+              ...getValues().member,
+              register_start: '',
+              register_end: '',
+            },
+          });
+        },
       },
       {
         id: 'member_register_select2',
@@ -67,15 +91,18 @@ export default function Category1(props) {
         id: 'member_register_start',
         name: 'member.register_start',
         register: register(
-          watch('member.register', props.set) ? { required : 'error' } : null
+          watch('member.register', props.set) ? { required: 'error' } : null,
         ),
+        isDisable: !watch('member.register', props.set),
       },
       {
         id: 'member_register_end',
         name: 'member.register_end',
         register: register({
-          validate: (value) => getValues().member.register_start <= value || 'error message'  // <p>error message</p>
-        })
+          validate: (value) =>
+            getValues().member.register_start <= value || 'error message', // <p>error message</p>
+        }),
+        isDisable: !watch('member.register', props.set),
       },
     ],
   };
